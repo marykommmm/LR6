@@ -36,4 +36,12 @@
         android:padding="12dp"
         android:layout_marginTop="10dp"/>
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:layout_margin="16dp"/>
+
+
 </LinearLayout>

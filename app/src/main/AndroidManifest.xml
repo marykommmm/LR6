@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyGyroTracker">
 
-        <!-- Головний екран -->
+        <!-- ЛОГІН – головний екран -->
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,12 +22,22 @@
             </intent-filter>
         </activity>
 
-        <!-- Екран з графіком -->
+        <!-- Головний екран (не launcher) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
+        <!-- Реєстрація -->
+        <activity
+            android:name=".RegistrationActivity"
+            android:exported="true" />
+
+        <!-- Графік -->
         <activity
             android:name=".ChartActivity"
             android:exported="true" />
 
-        <!-- Екран зі статистикою -->
+        <!-- Статистика -->
         <activity
             android:name=".StatsActivity"
             android:exported="true" />

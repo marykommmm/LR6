@@ -5,8 +5,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {SensorData.class}, version = 1, exportSchema = false)
+@Database(entities = {SensorData.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
+
     public abstract SensorDataDao sensorDataDao();
 
     private static volatile AppDatabase INSTANCE;
@@ -15,8 +16,11 @@ public abstract class AppDatabase extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    AppDatabase.class, "sensor_db")
+                    INSTANCE = Room.databaseBuilder(
+                                    context.getApplicationContext(),
+                                    AppDatabase.class,
+                                    "sensor_db"
+                            )
                             .fallbackToDestructiveMigration()
                             .build();
                 }

@@ -36,7 +36,14 @@ public class StatsActivity extends AppCompatActivity {
         // Кнопка очищення історії
         btnClear.setOnClickListener(v -> {
             new Thread(() -> {
-                db.sensorDataDao().clearAll();
+
+                String uid = com.google.firebase.auth.FirebaseAuth
+                        .getInstance()
+                        .getCurrentUser()
+                        .getUid();
+
+                db.sensorDataDao().clearAll(uid);
+
                 runOnUiThread(() -> {
                     tvMin.setText("Min: -");
                     tvMax.setText("Max: -");
@@ -45,6 +52,7 @@ public class StatsActivity extends AppCompatActivity {
                 });
             }).start();
         });
+
 
         // Додаємо стрілку "назад" у Toolbar
         if (getSupportActionBar() != null) {
@@ -66,7 +74,12 @@ public class StatsActivity extends AppCompatActivity {
     private void updateStats() {
         new Thread(() -> {
             try {
-                List<SensorData> dataList = db.sensorDataDao().getAllData();
+                String uid = com.google.firebase.auth.FirebaseAuth
+                        .getInstance()
+                        .getCurrentUser()
+                        .getUid();
+
+                List<SensorData> dataList = db.sensorDataDao().getAllData(uid);
 
                 if (dataList == null || dataList.isEmpty()) {
                     runOnUiThread(() -> {
@@ -89,10 +102,10 @@ public class StatsActivity extends AppCompatActivity {
                     sum += v;
                 }
 
-                final float avg = sum / dataList.size();
-                final float finalMin = min;
-                final float finalMax = max;
-                final int count = dataList.size();
+                float avg = sum / dataList.size();
+                float finalMin = min;
+                float finalMax = max;
+                int count = dataList.size();
 
                 runOnUiThread(() -> {
                     tvMin.setText(String.format("Min: %.2f", finalMin));
